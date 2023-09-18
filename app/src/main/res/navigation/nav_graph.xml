@@ -20,9 +20,8 @@
         android:label="fragment_problem_solving_screen"
         tools:layout="@layout/fragment_problem_solving_screen" >
         <argument
-            android:name="difficultySelection"
-            app:argType="string"
-            android:defaultValue=""/>
+            android:name="combinedSelection"
+            app:argType="string" />
 
     </fragment>
 </navigation>

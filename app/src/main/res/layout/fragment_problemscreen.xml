@@ -1,146 +1,201 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".ProblemScreenFragment">
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"
-        app:srcCompat="@drawable/math" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal">
+        app:srcCompat="@drawable/math"
+        app:layout_constraintHeight_percent="0.3"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
 
-        <TextView
-            android:id="@+id/difficultyText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Select Difficulty"
-            android:textAlignment="textStart"
+    <TextView
+        android:id="@+id/difficultyText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Select difficulty:"
+        android:textAlignment="textStart"
+        android:textSize="20sp"
+        android:textColor="@color/gray"
+        app:layout_constraintTop_toBottomOf="@id/imageView"
+        app:layout_constraintWidth_percent=".5"
+        tools:ignore="HardcodedText,MissingConstraints,NestedWeights" />
+    <TextView
+        android:id="@+id/operandText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Select operand:"
+        android:textSize="20sp"
+        android:textColor="@color/gray"
+        app:layout_constraintTop_toBottomOf="@id/imageView"
+        app:layout_constraintStart_toEndOf="@id/difficultyText"
+        app:layout_constraintWidth_percent=".5"
+        android:textAlignment="textStart"
+        tools:ignore="HardcodedText,MissingConstraints" />
+
+    <RadioGroup
+        android:id="@+id/difficultyRGroup"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/difficultyText"
+        tools:ignore="MissingConstraints,NestedWeights">
+
+        <RadioButton
+            android:id="@+id/easyOption"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="Easy"
+            android:textStyle="bold"
             android:textSize="20sp"
-            android:textStyle="bold" />
-        <TextView
-            android:id="@+id/operandText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Select Operand"
+            tools:ignore="HardcodedText, TouchTargetSizeCheck" />
+
+        <RadioButton
+            android:id="@+id/mediumOption"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="Medium"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            tools:ignore="HardcodedText, TouchTargetSizeCheck" />
+
+        <RadioButton
+            android:id="@+id/hardOption"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="Hard"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            tools:ignore="HardcodedText, TouchTargetSizeCheck" />
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/selectionRGroup"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/operandText"
+        app:layout_constraintStart_toEndOf="@id/difficultyText"
+        tools:ignore="MissingConstraints">
+
+        <RadioButton
+            android:id="@+id/additionOption"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="Addition"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:textAlignment="textStart"/>
+            tools:ignore="HardcodedText,TouchTargetSizeCheck" />
 
-    </LinearLayout>
+        <RadioButton
+            android:id="@+id/multiplicationOption"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="Multiplication"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText,TouchTargetSizeCheck" />
+        <RadioButton
+            android:id="@+id/divisionOption"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="Division"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            tools:ignore="HardcodedText,TouchTargetSizeCheck" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="3"
-        android:orientation="horizontal">
-
-        <RadioGroup
-            android:id="@+id/difficultyRGroup"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <RadioButton
-                android:id="@+id/easyOption"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Easy"
-                android:textSize="20sp"
-                android:textStyle="bold"/>
-
-            <RadioButton
-                android:id="@+id/mediumOption"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Medium"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-        </RadioGroup>
-
-        <RadioGroup
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <RadioButton
-                android:id="@+id/additionOption"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Addition"
-                android:textSize="20sp"
-                android:textStyle="bold"/>
-
-            <RadioButton
-                android:id="@+id/minusOption"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Subtraction"
-                android:textSize="20sp"
-                android:textStyle="bold"/>
-        </RadioGroup>
-
-    </LinearLayout>
+        <RadioButton
+            android:id="@+id/minusOption"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="Subtraction"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            tools:ignore="HardcodedText,TouchTargetSizeCheck" />
+    </RadioGroup>
 
     <TextView
         android:id="@+id/questionText"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:text="Number of Questions"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_gravity="center"/>
-    <LinearLayout
-        android:layout_width="match_parent"
+        android:text="Number of questions"
+        android:textSize="30sp"
+        android:textColor="@color/gray"
+        android:layout_gravity="center"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintHeight_percent="0.05"
+        app:layout_constraintWidth_percent=".95"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/questionNumber"
+        tools:ignore="HardcodedText,MissingConstraints" />
+
+    <Button
+        android:id="@+id/decrement"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1">
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="-"
-            android:textSize="40sp">
-        </Button>
-        <TextView
-            android:id="@+id/questionNumber"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="0"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:layout_gravity="center"/>
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="+"
-            android:textSize="40sp">
-        </Button>
-    </LinearLayout>
+        android:background="@color/transparent"
+        android:text="-"
+        android:textColor="@color/gray"
+        android:textSize="42sp"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintWidth_percent="0.2"
+        tools:ignore="HardcodedText,MissingConstraints,NestedWeights"
+        tools:layout_editor_absoluteX="103dp"
+        tools:layout_editor_absoluteY="455dp" />
+
+    <TextView
+        android:id="@+id/questionNumber"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="10"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintWidth_percent="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/startButton"
+        tools:ignore="HardcodedText,MissingConstraints" />
+
+    <Button
+        android:id="@+id/increment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/transparent"
+        android:text="+"
+        android:textColor="@color/gray"
+        android:textSize="42sp"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintWidth_percent="0.2"
+        tools:ignore="HardcodedText,MissingConstraints"
+        tools:layout_editor_absoluteX="226dp"
+        tools:layout_editor_absoluteY="455dp" />
+
     <Button
         android:id="@+id/startButton"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:text="Start"
-        android:onClick="onClick"
-        android:textSize="40sp">
+        android:text="START"
+        app:cornerRadius="0dp"
+        android:textSize="25sp"
+        android:textColor="@color/black"
+        android:background="@color/dark_gray"
+        app:layout_constraintHeight_percent="0.25"
+        app:layout_constraintWidth_percent="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:ignore="HardcodedText,MissingConstraints">
 
     </Button>
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
