@@ -6,19 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ProblemSolvingScreen">
 
-
-    <TextView
-        android:id="@+id/testText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="..."
-        android:textSize="20sp"
-        app:layout_constraintWidth_percent="0.8"
-        tools:ignore="HardcodedText,MissingConstraints"
-        tools:layout_editor_absoluteX="37dp"
-        tools:layout_editor_absoluteY="68dp" />
-
     <TextView
         android:id="@+id/whatIs"
         android:layout_width="0dp"
@@ -36,11 +23,13 @@
 
     <TextView
         android:id="@+id/problemText"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=" 8            X            3"
+        android:text=""
         android:textSize="50sp"
         android:layout_marginBottom="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/answerEdit"
         tools:ignore="HardcodedText,MissingConstraints"
         tools:layout_editor_absoluteX="0dp"
@@ -69,8 +58,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="DONE"
-        android:textColor="#000000"
-        android:background="@color/gray"
+        style="@style/myButton"
         app:layout_constraintHeight_percent="0.07"
         app:layout_constraintWidth_percent="0.8"
         app:layout_constraintBottom_toTopOf="@id/imageView2"

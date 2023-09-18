@@ -25,6 +25,8 @@ class ProblemScreenFragment : Fragment() {
         val difficultyRadioGroup = view.findViewById<RadioGroup>(R.id.difficultyRGroup)
         val selectionRadioGroup = view.findViewById<RadioGroup>(R.id.selectionRGroup)
         val questionNumbers = view.findViewById<TextView>(R.id.questionNumber)
+        val decrementButton = view.findViewById<Button>(R.id.decrement)
+        val incrementButton = view.findViewById<Button>(R.id.increment)
 
         var difficultySelection = ""
         var operandSelection = ""
@@ -42,17 +44,28 @@ class ProblemScreenFragment : Fragment() {
 
         startButton.setOnClickListener{
             if(difficultySelection != "" && operandSelection != "" && numberOfQuestions.toString().toInt() != 0){
-//                val combinedSelection = "$difficultySelection|$operandSelection"
-//                val action = ProblemScreenFragmentDirections.actionProblemScreenFragmentToProblemSolvingScreen(combinedSelection)
-//                Log.e("Check Variable", combinedSelection)
-//                view.findNavController().navigate(action)
-
                 val combinedSelection = "$difficultySelection|$operandSelection|$numberOfQuestions"
-                Log.e("Check Variable", combinedSelection)
+                //Log.e("Check Variable", combinedSelection)
                 val action = ProblemScreenFragmentDirections
                     .actionProblemScreenFragmentToProblemSolvingScreen(combinedSelection)
                 view.findNavController().navigate(action)
             }
+        }
+
+        decrementButton.setOnClickListener {
+            if(questionNumbers.text.toString().toInt() > 0){
+                var number = questionNumbers.text.toString().toInt()
+                number--
+                questionNumbers.text = number.toString()
+                numberOfQuestions = questionNumbers.text
+            }
+        }
+
+        incrementButton.setOnClickListener {
+            var number = questionNumbers.text.toString().toInt()
+            number++
+            questionNumbers.text = number.toString()
+            numberOfQuestions = questionNumbers.text
         }
 
         return view
