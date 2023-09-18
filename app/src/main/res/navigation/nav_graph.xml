@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/problemScreenFragment">
+
+    <fragment
+        android:id="@+id/problemScreenFragment"
+        android:name="com.example.project3.ProblemScreenFragment"
+        android:label="fragment_problemscreen"
+        tools:layout="@layout/fragment_problemscreen" >
+        <action
+            android:id="@+id/action_problemScreenFragment_to_problemSolvingScreen"
+            app:destination="@id/problemSolvingScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/problemSolvingScreen"
+        android:name="com.example.project3.ProblemSolvingScreen"
+        android:label="fragment_problem_solving_screen"
+        tools:layout="@layout/fragment_problem_solving_screen" >
+        <argument
+            android:name="difficultySelection"
+            app:argType="string"
+            android:defaultValue=""/>
+
+    </fragment>
+</navigation>
