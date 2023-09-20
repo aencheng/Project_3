@@ -1,4 +1,4 @@
-# Project Name
+# Kiddie Arithmetic!
 
 Description of the project ...
 
