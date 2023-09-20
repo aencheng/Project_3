@@ -45,7 +45,6 @@ class ProblemScreenFragment : Fragment() {
         startButton.setOnClickListener{
             if(difficultySelection != "" && operandSelection != "" && numberOfQuestions.toString().toInt() != 0){
                 val combinedSelection = "$difficultySelection|$operandSelection|$numberOfQuestions"
-                //Log.e("Check Variable", combinedSelection)
                 val action = ProblemScreenFragmentDirections
                     .actionProblemScreenFragmentToProblemSolvingScreen(combinedSelection)
                 view.findNavController().navigate(action)

@@ -1,7 +1,7 @@
 package com.example.project3
 
 import android.annotation.SuppressLint
-import android.icu.math.BigDecimal
+import java.math.BigDecimal
 import android.os.Bundle
 import android.text.SpannableStringBuilder
 import android.util.Log
@@ -13,6 +13,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.navigation.findNavController
+import java.math.RoundingMode
 import kotlin.random.Random
 
 class ProblemSolvingScreen : Fragment() {
@@ -36,14 +37,16 @@ class ProblemSolvingScreen : Fragment() {
         val doneButton = view.findViewById<Button>(R.id.doneButton)
         val inputText = view.findViewById<EditText>(R.id.answerEdit)
 
-        fun evalHelper(first: Int, operator: String, second: Int): BigDecimal? {
+        fun evalHelper(first: Int, operator: String, second: Int): Double {
             val result = when (operator) {
-                "Addition" -> BigDecimal(first).add(BigDecimal(second))
-                "Subtraction" -> BigDecimal(first).subtract(BigDecimal(second))
-                "Multiplication" -> BigDecimal(first).multiply(BigDecimal(second))
-                "Division" -> BigDecimal(first).divide(BigDecimal(second))
+                "Addition" -> BigDecimal(first).add(BigDecimal(second)).toDouble()
+                "Subtraction" -> BigDecimal(first).subtract(BigDecimal(second)).toDouble()
+                "Multiplication" -> BigDecimal(first).multiply(BigDecimal(second)).toDouble()
+                "Division" -> BigDecimal(first.toString()).divide(BigDecimal(second.toString()), 2, RoundingMode.HALF_UP).toDouble()
+
                 else -> throw IllegalArgumentException("Invalid operator")
             }
+            Log.e("RESULT", "$first|$second|$result")
             return result
         }
 
@@ -62,7 +65,7 @@ class ProblemSolvingScreen : Fragment() {
         }
 
         var n2 = when(difficulty){
-            "Easy" -> Random.nextInt(0, 9)
+            "Easy" -> Random.nextInt(1, 9)
             "Medium" -> Random.nextInt(10, 25)
             "Hard" -> Random.nextInt(26, 50)
             else -> throw IllegalArgumentException("Invalid Difficulty")
@@ -80,7 +83,7 @@ class ProblemSolvingScreen : Fragment() {
             when (numberOfQuestions) {
                 0 -> {
                     val evaluate = evalHelper(n1, operand, n2)
-                    if(inputText.text.toString().toInt() == evaluate!!.toInt()){
+                    if(inputText.text.toString().toDouble() == evaluate){
                         correctCount++
                     }
                     val combinedResult = "Your score: $correctCount out of $originalNumber"
@@ -90,7 +93,7 @@ class ProblemSolvingScreen : Fragment() {
                 }
                 originalNumber - 1 -> {
                     val evaluate = evalHelper(n1, operand, n2)
-                    if(inputText.text.toString().toInt() == evaluate!!.toInt()){
+                    if(inputText.text.toString().toDouble() == evaluate){
                         correctCount++
                     }
                     n1 = when(difficulty){
@@ -101,7 +104,7 @@ class ProblemSolvingScreen : Fragment() {
                     }
 
                     n2 = when(difficulty){
-                        "Easy" -> Random.nextInt(0, 9)
+                        "Easy" -> Random.nextInt(1, 9)
                         "Medium" -> Random.nextInt(10, 25)
                         "Hard" -> Random.nextInt(26, 50)
                         else -> throw IllegalArgumentException("Invalid Difficulty")
@@ -120,7 +123,7 @@ class ProblemSolvingScreen : Fragment() {
                 }
                 else -> {
                     val evaluate = evalHelper(n1, operand, n2)
-                    if(inputText.text.toString().toInt() == evaluate!!.toInt()){
+                    if(inputText.text.toString().toDouble() == evaluate){
                         correctCount++
                     }
                     n1 = when(difficulty){
@@ -131,7 +134,7 @@ class ProblemSolvingScreen : Fragment() {
                     }
 
                     n2 = when(difficulty){
-                        "Easy" -> Random.nextInt(0, 9)
+                        "Easy" -> Random.nextInt(1, 9)
                         "Medium" -> Random.nextInt(10, 25)
                         "Hard" -> Random.nextInt(26, 50)
                         else -> throw IllegalArgumentException("Invalid Difficulty")
