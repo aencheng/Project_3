@@ -2,7 +2,6 @@ package com.example.project3
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -21,6 +20,7 @@ class ProblemScreenFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_problemscreen, container, false)
 
+        // Finding views of our buttons, radioGroups, TextViews
         val startButton = view.findViewById<Button>(R.id.startButton)
         val difficultyRadioGroup = view.findViewById<RadioGroup>(R.id.difficultyRGroup)
         val selectionRadioGroup = view.findViewById<RadioGroup>(R.id.selectionRGroup)
@@ -28,20 +28,24 @@ class ProblemScreenFragment : Fragment() {
         val decrementButton = view.findViewById<Button>(R.id.decrement)
         val incrementButton = view.findViewById<Button>(R.id.increment)
 
+        // Variable to hold User Selections
         var difficultySelection = ""
         var operandSelection = ""
         var numberOfQuestions = questionNumbers.text
 
+        // Button will set User Selected Difficulty
         difficultyRadioGroup.setOnCheckedChangeListener{
                 _, checkedId -> val radioButton = view.findViewById<RadioButton>(checkedId)
             difficultySelection = radioButton.text.toString()
         }
 
+        // Button will set User Selected Operand
         selectionRadioGroup.setOnCheckedChangeListener{
                 _, checkedId -> val radioButton = view.findViewById<RadioButton>(checkedId)
             operandSelection = radioButton.text.toString()
         }
 
+        // Takes User Selections as a Single String argument to be passed to the next Fragment
         startButton.setOnClickListener{
             if(difficultySelection != "" && operandSelection != "" && numberOfQuestions.toString().toInt() != 0){
                 val combinedSelection = "$difficultySelection|$operandSelection|$numberOfQuestions"
@@ -51,6 +55,7 @@ class ProblemScreenFragment : Fragment() {
             }
         }
 
+        // Decrements Number of questions
         decrementButton.setOnClickListener {
             if(questionNumbers.text.toString().toInt() > 0){
                 var number = questionNumbers.text.toString().toInt()
@@ -60,6 +65,7 @@ class ProblemScreenFragment : Fragment() {
             }
         }
 
+        // Increments Number of questions
         incrementButton.setOnClickListener {
             var number = questionNumbers.text.toString().toInt()
             number++
