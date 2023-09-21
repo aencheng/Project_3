@@ -1,6 +1,7 @@
 package com.example.project3
 
 import android.annotation.SuppressLint
+import android.media.MediaPlayer
 import java.math.BigDecimal
 import android.os.Bundle
 import android.text.SpannableStringBuilder
@@ -12,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.navigation.findNavController
 import java.math.RoundingMode
 import kotlin.random.Random
@@ -96,50 +98,59 @@ class ProblemSolvingScreen : Fragment() {
 
 
         doneButton.setOnClickListener {
-
-            // when counter reaches 0, it'll check answer and then pass result to next fragment as argument
-            when (numberOfQuestions) {
-                0 -> {
-                    val evaluate = evalHelper(n1, operand, n2)
-                    if(inputText.text.toString().toDouble() == evaluate){
-                        correctCount++
-                    }
-                    val combinedResult = "Your score: $correctCount out of $originalNumber"
-                    //Log.e("Check Variable", combinedSelection)
-                    val action = ProblemSolvingScreenDirections.actionProblemSolvingScreenToResultFragment(combinedResult)
-                    view.findNavController().navigate(action)
-                }
-
-                // otherwise, it needs to check answer and create new question while decrementing the count.
-                else -> {
-                    val evaluate = evalHelper(n1, operand, n2)
-                    if(inputText.text.toString().toDouble() == evaluate){
-                        correctCount++
-                    }
-                    n1 = when(difficulty){
-                        "Easy" -> Random.nextInt(0, 9)
-                        "Medium" -> Random.nextInt(10, 25)
-                        "Hard" -> Random.nextInt(26, 50)
-                        else -> throw IllegalArgumentException("Invalid Difficulty")
+            if(inputText.text.isNotEmpty()){
+                // when counter reaches 0, it'll check answer and then pass result to next fragment as argument
+                when (numberOfQuestions) {
+                    0 -> {
+                        val evaluate = evalHelper(n1, operand, n2)
+                        if(inputText.text.toString().toDouble() == evaluate){
+                            correctCount++
+                        }
+                        val resultString = "$correctCount|$originalNumber|$operand"
+                        //Log.e("Check Variable", combinedSelection)
+                        val action = ProblemSolvingScreenDirections.actionProblemSolvingScreenToProblemScreenFragment(resultString)
+                        view.findNavController().navigate(action)
                     }
 
-                    n2 = when(difficulty){
-                        "Easy" -> Random.nextInt(1, 9)
-                        "Medium" -> Random.nextInt(10, 25)
-                        "Hard" -> Random.nextInt(26, 50)
-                        else -> throw IllegalArgumentException("Invalid Difficulty")
+                    // otherwise, it needs to check answer and create new question while decrementing the count.
+                    else -> {
+                        val evaluate = evalHelper(n1, operand, n2)
+                        if(inputText.text.toString().toDouble() == evaluate){
+                            Toast.makeText(requireContext(), "Correct. Good work!", Toast.LENGTH_SHORT).show()
+                            val mediaPlayer = MediaPlayer.create(context, R.raw.correct)
+                            mediaPlayer.start()
+                            correctCount++
+                        }
+                        else{
+                            Toast.makeText(requireContext(), "Wrong", Toast.LENGTH_SHORT).show()
+                            val mediaPlayer = MediaPlayer.create(context, R.raw.wrong)
+                            mediaPlayer.start()
+                        }
+                        n1 = when(difficulty){
+                            "Easy" -> Random.nextInt(0, 9)
+                            "Medium" -> Random.nextInt(10, 25)
+                            "Hard" -> Random.nextInt(26, 50)
+                            else -> throw IllegalArgumentException("Invalid Difficulty")
+                        }
+
+                        n2 = when(difficulty){
+                            "Easy" -> Random.nextInt(1, 9)
+                            "Medium" -> Random.nextInt(10, 25)
+                            "Hard" -> Random.nextInt(26, 50)
+                            else -> throw IllegalArgumentException("Invalid Difficulty")
+                        }
+                        text.text = when(operand) {
+                            "Addition" -> "$n1      +      $n2"
+                            "Subtraction" -> "$n1      -      $n2"
+                            "Multiplication" -> "$n1      X      $n2"
+                            "Division" -> "$n1      /      $n2"
+                            else -> throw IllegalArgumentException("Invalid Operator")
+                        }
+                        val emptyEditable = SpannableStringBuilder()
+                        inputText.text = emptyEditable // empties EditText
+                        inputText.clearFocus() // removes Text Cursor
+                        numberOfQuestions--
                     }
-                    text.text = when(operand) {
-                        "Addition" -> "$n1      +      $n2"
-                        "Subtraction" -> "$n1      -      $n2"
-                        "Multiplication" -> "$n1      X      $n2"
-                        "Division" -> "$n1      /      $n2"
-                        else -> throw IllegalArgumentException("Invalid Operator")
-                    }
-                    val emptyEditable = SpannableStringBuilder()
-                    inputText.text = emptyEditable // empties EditText
-                    inputText.clearFocus() // removes Text Cursor
-                    numberOfQuestions--
                 }
             }
         }

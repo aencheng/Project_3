@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_problemScreenFragment_to_problemSolvingScreen"
             app:destination="@id/problemSolvingScreen" />
+        <argument
+            android:name="resultString"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/problemSolvingScreen"
@@ -23,20 +26,8 @@
             android:name="combinedSelection"
             app:argType="string" />
         <action
-            android:id="@+id/action_problemSolvingScreen_to_resultFragment"
-            app:destination="@id/resultFragment" />
-
-    </fragment>
-    <fragment
-        android:id="@+id/resultFragment"
-        android:name="com.example.project3.ResultFragment"
-        android:label="fragment_result"
-        tools:layout="@layout/fragment_result" >
-        <action
-            android:id="@+id/action_resultFragment_to_problemScreenFragment"
+            android:id="@+id/action_problemSolvingScreen_to_problemScreenFragment"
             app:destination="@id/problemScreenFragment" />
-        <argument
-            android:name="combinedResult"
-            app:argType="string" />
+
     </fragment>
 </navigation>

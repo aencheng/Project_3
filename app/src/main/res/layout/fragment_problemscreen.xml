@@ -16,6 +16,16 @@
         tools:ignore="ContentDescription" />
 
     <TextView
+        android:id="@+id/resultText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        tools:ignore="MissingConstraints">
+
+    </TextView>
+
+    <TextView
         android:id="@+id/difficultyText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -24,7 +34,7 @@
         android:textAlignment="textStart"
         android:textColor="@color/dark_gray"
         android:textSize="20sp"
-        app:layout_constraintTop_toBottomOf="@id/imageView"
+        app:layout_constraintBottom_toTopOf="@id/difficultyRGroup"
         app:layout_constraintWidth_percent=".5"
         tools:ignore="HardcodedText,MissingConstraints,NestedWeights" />
 
@@ -37,8 +47,8 @@
         android:textAlignment="textStart"
         android:textColor="@color/dark_gray"
         android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@id/selectionRGroup"
         app:layout_constraintStart_toEndOf="@id/difficultyText"
-        app:layout_constraintTop_toBottomOf="@id/imageView"
         app:layout_constraintWidth_percent=".5"
         tools:ignore="HardcodedText,MissingConstraints" />
 
@@ -47,7 +57,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/difficultyText"
+        app:layout_constraintTop_toTopOf="@id/selectionRGroup"
         tools:ignore="MissingConstraints,NestedWeights">
 
         <RadioButton
@@ -83,8 +93,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/questionText"
         app:layout_constraintStart_toEndOf="@id/difficultyText"
-        app:layout_constraintTop_toBottomOf="@id/operandText"
         tools:ignore="MissingConstraints">
 
         <RadioButton
@@ -197,7 +207,7 @@
         android:textSize="25sp"
         app:cornerRadius="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHeight_percent="0.25"
+        app:layout_constraintHeight_percent="0.3"
         app:layout_constraintWidth_percent="1"
         tools:ignore="HardcodedText,MissingConstraints">
 
