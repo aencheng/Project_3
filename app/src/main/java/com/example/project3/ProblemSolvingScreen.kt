@@ -21,7 +21,7 @@ import kotlin.random.Random
 class ProblemSolvingScreen : Fragment() {
     private var param1: String? = null
 
-    // Pulls argument passed from Previous Fragment
+    // Pulls argument passed from First Fragment
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.getString("combinedSelection")?.let {
@@ -108,6 +108,7 @@ class ProblemSolvingScreen : Fragment() {
                         }
                         val resultString = "$correctCount|$originalNumber|$operand"
                         //Log.e("Check Variable", combinedSelection)
+                        // Removed third fragment. Now passing data to the first Screen.
                         val action = ProblemSolvingScreenDirections.actionProblemSolvingScreenToProblemScreenFragment(resultString)
                         view.findNavController().navigate(action)
                     }
@@ -115,6 +116,8 @@ class ProblemSolvingScreen : Fragment() {
                     // otherwise, it needs to check answer and create new question while decrementing the count.
                     else -> {
                         val evaluate = evalHelper(n1, operand, n2)
+                        // Other than making sure the user input is correct, based on answers, the app will
+                        // play a sound and toast accordingly
                         if(inputText.text.toString().toDouble() == evaluate){
                             Toast.makeText(requireContext(), "Correct. Good work!", Toast.LENGTH_SHORT).show()
                             val mediaPlayer = MediaPlayer.create(context, R.raw.correct)

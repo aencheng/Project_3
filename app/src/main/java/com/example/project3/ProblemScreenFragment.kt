@@ -20,7 +20,7 @@ import java.math.RoundingMode
 class ProblemScreenFragment : Fragment() {
     private var param1: String? = null
 
-    // Pulls argument passed from Previous Fragment
+    // Pulls argument passed from Second Fragment
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.getString("resultString")?.let {
@@ -46,11 +46,14 @@ class ProblemScreenFragment : Fragment() {
         val resultText = view.findViewById<TextView>(R.id.resultText)
 
         if(param1 != null){
+            // Takes result argument passed from the Second Fragment and make them usable.
             val list = param1!!.split("|")
             val correctCount = list[0]
             val totalQuestions = list[1]
             val operation = list[2]
 
+            // Based on result, the home screen will display a specific message, as well as adjust the size of
+            // other items within the view in order to properly make space for all items.
             if(BigDecimal(correctCount).divide(BigDecimal(totalQuestions), 2, RoundingMode.HALF_UP).toDouble() < 0.8){
                 val buttonParams = startButton.layoutParams as ConstraintLayout.LayoutParams
                 buttonParams.matchConstraintPercentHeight = 0.17f
