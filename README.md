@@ -12,7 +12,7 @@ The following **required** functionality is completed:
 * [ ] Results should be displayed in Activity 1
 * [ ] Activity 2 Shows a Toast based on User's answer
 * [ ] Activity 2 plays a sound based on user's answer
-* [ ] ...
+* [ ] Use of safe args.
 
 The following **extensions** are implemented:
 
